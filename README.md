@@ -10,4 +10,4 @@ Tuân thủ theo mô hình MVC.
 
 1. Import `database.sql` vào MySQL.
 2. Cấu hình `config/Database.php` nếu cần.
-3. Chạy `index.php`.
+3. # Chạy `index.php`.
