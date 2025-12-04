@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Course Management</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<nav>
+    <!-- Navigation Bar -->
+</nav>
+<div class="container">
