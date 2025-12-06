@@ -13,8 +13,8 @@ spl_autoload_register(function ($class_name) {
 });
 
 // Simple Router
-$controller = isset($_GET['controller']) ? $_GET['controller'] : 'home';
-$action = isset($_GET['action']) ? $_GET['action'] : 'index';
+$controller = isset($_GET['controller']) ? trim($_GET['controller'], " .") : 'home';
+$action = isset($_GET['action']) ? trim($_GET['action'], " .") : 'index';
 
 $controllerName = ucfirst($controller) . 'Controller';
 
