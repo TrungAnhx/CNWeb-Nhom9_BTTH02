@@ -1,0 +1,405 @@
+{
+  "brandExtraction": {
+    "url": "https://www.udemy.com/",
+    "scanDuration": "40:27",
+    "assets": {
+      "logo": {
+        "url": "https://cdn.cookielaw.org/logos/c7d0d27d-e055-4572-8927-d3c994df5f60/01993998-4d83-7b89-ba6c-9832e3ea37fe/5e4ae68b-8ab5-4c4d-a496-e5df724af69f/udemy-logo.png",
+        "dimensions": "388x176px"
+      },
+      "favicons": [
+        {
+          "type": "apple-touch-icon",
+          "url": "https://frontends.udemycdn.com/frontends-homepage/staticx/udemy/images/v7/apple-touch-icon.png",
+          "size": "180x180"
+        },
+        {
+          "type": "icon",
+          "url": "https://frontends.udemycdn.com/frontends-homepage/staticx/udemy/images/v8/favicon-32x32.png",
+          "size": "32x32"
+        },
+        {
+          "type": "icon",
+          "url": "https://frontends.udemycdn.com/frontends-homepage/staticx/udemy/images/v8/favicon-16x16.png",
+          "size": "16x16"
+        },
+        {
+          "type": "og:image",
+          "url": "https://s.udemycdn.com/meta/default-meta-image-v2.png"
+        },
+        {
+          "type": "twitter:image",
+          "url": "https://s.udemycdn.com/meta/default-meta-image-v2.png"
+        },
+        {
+          "type": "favicon.ico",
+          "url": "https://www.udemy.com/favicon.ico"
+        }
+      ]
+    },
+    "designTokens": {
+      "colors": [
+        {
+          "value": "oklch(0.4841 0.2342 293.93)",
+          "name": "primary"
+        },
+        {
+          "value": "#000000",
+          "rgba": "rgba(0, 0, 0, 0)",
+          "name": "secondary"
+        },
+        {
+          "value": "oklch(76.95% 0.1342 296.84deg)",
+          "name": "--color-purple-200"
+        },
+        {
+          "value": "oklch(51.46% 0.2065 29.98deg)",
+          "name": "--color-red-450"
+        },
+        {
+          "value": "#eeeffc",
+          "rgb": "rgb(238, 239, 252)",
+          "name": "--color-blue-100"
+        },
+        {
+          "value": "oklch(87.41% 0.1102 76.47deg)",
+          "name": "--color-orange-200"
+        },
+        {
+          "value": "#371783",
+          "rgb": "rgb(55, 23, 131)",
+          "name": "--color-indigo-400"
+        },
+        {
+          "value": "#d2cf1e",
+          "rgb": "rgb(210, 207, 30)",
+          "name": "--color-yellow-350"
+        },
+        {
+          "value": "oklch(35.86% 0.1795 284.97deg)",
+          "name": "--color-purple-500"
+        },
+        {
+          "value": "oklch(37.76% 0.0714 158.21deg)",
+          "name": "--color-green-450"
+        },
+        {
+          "value": "#281160",
+          "rgb": "rgb(40, 17, 96)",
+          "name": "--color-blue-450"
+        },
+        {
+          "value": "oklch(43.47% 0.2239 285.34deg)",
+          "name": "--color-purple-450"
+        },
+        {
+          "value": "oklch(56.28% 0.045 278.7deg)",
+          "name": "--color-gray-350"
+        },
+        {
+          "value": "oklch(86.3% 0.0733 291.71deg)",
+          "name": "--color-purple-150"
+        },
+        {
+          "value": "oklch(81.19% 0.1424 76.67deg)",
+          "name": "--color-orange-250"
+        },
+        {
+          "value": "oklch(55.87% 0.0933 207.35deg)",
+          "name": "--color-teal-400"
+        },
+        {
+          "value": "#8072e6",
+          "rgb": "rgb(128, 114, 230)",
+          "name": "--color-blue-250"
+        },
+        {
+          "value": "#1c1d1f",
+          "rgb": "rgb(28, 29, 31)"
+        },
+        {
+          "value": "#5624d0",
+          "rgb": "rgb(86, 36, 208)"
+        },
+        {
+          "value": "oklch(0.5333 0.2476 301.09)"
+        },
+        {
+          "value": "oklch(0.450428 0.207764 292.869)"
+        },
+        {
+          "value": "oklch(0.4841 0.2342 293.93 / 0.12)"
+        }
+      ],
+      "typography": {
+        "Udemy Sans": {
+          "fallbacks": [
+            "Vazirmatn",
+            "SF Pro Text",
+            "-apple-system",
+            "system-ui",
+            "Roboto",
+            "Segoe UI",
+            "Helvetica",
+            "Arial",
+            "Apple Color Emoji",
+            "Segoe UI Emoji",
+            "Segoe UI Symbol"
+          ],
+          "styles": {
+            "heading-1": [
+              "32px (2.00rem) [w500 lh1.10(tight)]",
+              "24px (1.50rem) [w500 lh1.10(tight)]",
+              "24px (1.50rem) [w700 lh1.40]",
+              "21.92px (1.37rem) [w600 lh1.20(tight)]",
+              "18px (1.13rem) [w500 lh1.20(tight)]",
+              "18px (1.13rem) [lh1.50]",
+              "18px (1.13rem) [w300 lh1.50]",
+              "16px (1.00rem) [w300 lh1.60(relaxed)]",
+              "16px (1.00rem) [w700 lh1.60(relaxed)]",
+              "16px (1.00rem) [lh1.60(relaxed)]",
+              "16px (1.00rem) [w500 lh1.20(tight)]",
+              "14.08px (0.88rem)"
+            ],
+            "link": [
+              "18px (1.13rem) [w500 lh1.20(tight)]",
+              "16px (1.00rem) [w300 lh1.60(relaxed)]",
+              "14.08px (0.88rem)",
+              "14px (0.88rem) [w300 lh1.60(relaxed)]",
+              "12px (0.75rem)"
+            ],
+            "button": [
+              "18px (1.13rem) [w700 lh1.20(tight)]",
+              "16px (1.00rem) [w700 lh1.20(tight)]",
+              "16px (1.00rem) [w500 lh1.20(tight)]",
+              "16px (1.00rem) [w300 lh1.60(relaxed)]",
+              "14.4px (0.90rem) [lh2.64(relaxed) ls0.144px]",
+              "14.4px (0.90rem) [w700 lh1.00(tight) ls0.144px]",
+              "14.4px (0.90rem) [w600 ls0.144px]",
+              "14px (0.88rem) [w700 lh1.20(tight)]",
+              "14px (0.88rem) [w300 lh1.60(relaxed)]",
+              "13.008px (0.81rem) [lh1.10(tight) ls0.13008px]",
+              "0px (0.00rem) [lhInfinity(relaxed)]"
+            ],
+            "caption": [
+              "14px (0.88rem) [w300 lh1.60(relaxed)]",
+              "14px (0.88rem) [w700 lh1.20(tight)]",
+              "14px (0.88rem) [w500 lh1.20(tight)]",
+              "14px (0.88rem) [w600 lh1.40]",
+              "13.008px (0.81rem)",
+              "12.8px (0.80rem) [lh1.10(tight)]",
+              "12px (0.75rem) [w300 lh1.60(relaxed)]",
+              "12px (0.75rem) [lh1.40]",
+              "12px (0.75rem) [lh1.20(tight) ls0.2px]",
+              "8.5px (0.53rem)"
+            ]
+          }
+        },
+        "Arial": {
+          "styles": {
+            "button": [
+              "16px (1.00rem) [w700 lh1.20(tight)]",
+              "14px (0.88rem) [w700 lh1.20(tight)]"
+            ]
+          }
+        }
+      },
+      "spacing": {
+        "base": "8px",
+        "scale": [
+          "1px (0.06rem)",
+          "4px (0.25rem)",
+          "5px (0.31rem)",
+          "6px (0.38rem)",
+          "6.25px (0.39rem)",
+          "8px (0.50rem)",
+          "10px (0.63rem)",
+          "12px (0.75rem)",
+          "14.08px (0.88rem)",
+          "15px (0.94rem)",
+          "16px (1.00rem)",
+          "20px (1.25rem)",
+          "24px (1.50rem)",
+          "32px (2.00rem)",
+          "36px (2.25rem)"
+        ]
+      },
+      "borderRadius": [
+        {
+          "value": "2px",
+          "usage": "region, Close preference center, Functional Cookies - Cookie Details button opens Cookie List menu, Advertising Cookies - Cookie Details button opens Cookie List menu, Social Media Cookies - Cookie Details button opens Cookie List menu"
+        },
+        {
+          "value": "3px",
+          "usage": "div, tabpanel"
+        },
+        {
+          "value": "4px",
+          "usage": "button, combobox, div, badge"
+        },
+        {
+          "value": "8px",
+          "usage": "div, card, span, image"
+        },
+        {
+          "value": "16px",
+          "usage": "card, div"
+        },
+        {
+          "value": "20px",
+          "usage": "span"
+        },
+        {
+          "value": "1000px",
+          "usage": "div, button, image"
+        }
+      ],
+      "borders": [
+        "1px solid oklch(0.8672 0.0192 282.72) (div, card, img)",
+        "0px 0px 1px none none solid oklch(0.2974 0.0362 281.74) oklch(0.2974 0.0362 281.74) oklch(0.8672 0.0192 282.72) oklch(0.2974 0.0362 281.74) oklch(0.2974 0.0362 281.74) oklch(0.8672 0.0192 282.72) (div)",
+        "0px 0px 1px none none solid oklch(1 0 0) oklch(1 0 0) oklch(0.6722 0.0355 279.77) oklch(1 0 0) oklch(1 0 0) oklch(0.6722 0.0355 279.77) (div)",
+        "0px 0px 1px 10px none none solid solid #d7d7d7 (tab)",
+        "1px solid #5624d0 (button)",
+        "1px solid oklch(0.4841 0.2342 293.93) (button)",
+        "1px solid #ffffff (span)",
+        "2px inset oklch(0.2974 0.0362 281.74) (iframe)"
+      ],
+      "shadows": [
+        "oklch(0.2754 0.1638 265.98 / 0.08) 0px 2px 4px 0px, oklch(0.2754 0.1638 265.98 / 0.08) 0px 4px 12px 0px",
+        "oklch(0.8672 0.0192 282.72) 0px 0px 0px 1px, oklch(0.2754 0.1638 265.98 / 0.08) 0px 2px 4px 0px, oklch(0.2754 0.1638 265.98 / 0.08) 0px 4px 12px 0px"
+      ]
+    },
+    "components": {
+      "buttons": [
+        {
+          "variantColor": "oklch(0.4841 0.2342 293.93)",
+          "states": {
+            "default": {
+              "bg": "oklch(0.4841 0.2342 293.93)",
+              "text": "oklch(1 0 0)",
+              "padding": "0px 12px",
+              "radius": "4px",
+              "outline": "oklch(1 0 0) none 0px"
+            },
+            "hover": {
+              "text": "#ffffff"
+            },
+            "focus": {
+              "text": "#ffffff",
+              "border": "1px solid rgb(0, 0, 0)",
+              "outline": "rgb(0, 0, 0) solid 2px"
+            }
+          }
+        },
+        {
+          "variantColor": "oklch(1 0 0)",
+          "states": {
+            "default": {
+              "bg": "oklch(1 0 0)",
+              "text": "oklch(0.2974 0.0362 281.74)",
+              "padding": "0px 10px",
+              "radius": "1000px",
+              "outline": "oklch(0.2974 0.0362 281.74) none 0px"
+            },
+            "hover": {
+              "text": "#ffffff"
+            },
+            "focus": {
+              "text": "#ffffff",
+              "border": "1px solid rgb(0, 0, 0)",
+              "outline": "rgb(0, 0, 0) solid 2px"
+            }
+          }
+        },
+        {
+          "variantColor": "oklch(1 0 0 / 0.5)",
+          "states": {
+            "default": {
+              "bg": "oklch(1 0 0 / 0.5)",
+              "text": "oklch(0.2974 0.0362 281.74)",
+              "padding": "0px 12px",
+              "radius": "1000px",
+              "outline": "oklch(0.2974 0.0362 281.74) none 0px",
+              "opacity": "0.5"
+            },
+            "hover": {
+              "text": "#ffffff"
+            },
+            "focus": {
+              "text": "#ffffff",
+              "border": "1px solid rgb(0, 0, 0)",
+              "outline": "rgb(0, 0, 0) solid 2px"
+            }
+          }
+        }
+      ],
+      "inputs": {
+        "text": {
+          "default": {
+            "text": "oklch(0.2974 0.0362 281.74)",
+            "padding": "0px 0px 0px 4px",
+            "radius": "4px"
+          },
+          "focus": {
+            "bg": "#1eaedb",
+            "border": "1px solid rgb(0, 0, 0)",
+            "shadow": "rgb(33, 150, 243) 0px 0px 1px",
+            "outline": "rgb(0, 0, 0) solid 1px"
+          }
+        }
+      },
+      "links": [
+        {
+          "color": "oklch(0.4841 0.2342 293.93)",
+          "states": {
+            "hover": {
+              "color": "#1883fd",
+              "decoration": "underline"
+            }
+          }
+        },
+        {
+          "color": "oklch(1 0 0)",
+          "states": {
+            "hover": {
+              "color": "#1883fd",
+              "decoration": "underline"
+            }
+          }
+        },
+        {
+          "color": "oklch(0.2974 0.0362 281.74)",
+          "states": {
+            "hover": {
+              "color": "#1883fd",
+              "decoration": "underline"
+            }
+          }
+        },
+        {
+          "color": "#c0c4fc",
+          "states": {
+            "hover": {
+              "color": "#1883fd",
+              "decoration": "underline"
+            }
+          }
+        }
+      ]
+    },
+    "layout": {
+      "breakpoints": [
+        "1280px", "1024px", "1023px", "897px", "896px", "890px",
+        "769px", "768px", "767px", "750px", "640px", "610px",
+        "601px", "600px", "550px", "530px", "480px", "426px",
+        "425px", "400px"
+      ]
+    },
+    "technologies": {
+      "icons": "SVG",
+      "frameworks": [
+        "Vuetify 160 v-components"
+      ]
+    }
+  }
+}
