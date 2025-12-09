@@ -1,0 +1,145 @@
+/* Admin Dashboard CSS - Udemy Style */
+body {
+    font-family: 'Udemy Sans', 'SF Pro Text', -apple-system, BlinkMacSystemFont, Roboto, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background-color: #f7f9fa; /* Màu nền xám nhạt chuẩn Udemy */
+    margin: 0;
+}
+
+#wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Sidebar Styling */
+#sidebar {
+    width: 260px;
+    background: #1c1d1f; /* Màu đen Udemy (Heading color) */
+    color: #fff;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-brand {
+    padding: 20px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    background: #1c1d1f;
+    border-bottom: 1px solid #3e4143;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+.sidebar-brand i { color: #A435F0; margin-right: 8px; }
+
+.sidebar-menu {
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    color: #cee1f5; /* Màu text nhạt */
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    border-left: 4px solid transparent;
+}
+
+.sidebar-menu li a:hover {
+    background: #2d2f31;
+    color: #fff;
+}
+
+/* Active State - Màu tím Udemy */
+.sidebar-menu li a.active {
+    background: #2d2f31; /* Sáng hơn nền một chút */
+    color: #fff;
+    border-left-color: #A435F0; /* Viền trái màu tím */
+}
+
+.sidebar-menu i {
+    margin-right: 12px;
+    width: 24px;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* Content Wrapper */
+#content-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#header {
+    background: #fff;
+    height: 72px; /* Chiều cao header chuẩn Udemy */
+    padding: 0 32px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+}
+#header h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2d2f31;
+    margin: 0;
+}
+.user-info {
+    font-weight: 600;
+    color: #2d2f31;
+}
+
+#main-content {
+    padding: 32px;
+}
+
+/* Stats Cards */
+.stat-card {
+    background: #fff;
+    border-radius: 0; /* Udemy chuộng góc vuông hoặc bo rất nhẹ */
+    padding: 24px;
+    border: 1px solid #d1d7dc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    transition: transform 0.2s;
+}
+
+.stat-card:hover {
+    border-color: #A435F0; /* Hover viền tím */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    opacity: 0.8;
+}
+
+.stat-info h4 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d2f31;
+}
+.stat-info p {
+    margin: 5px 0 0;
+    color: #6a6f73;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+/* Màu sắc icon riêng biệt */
+.text-purple { color: #A435F0 !important; }
+.bg-purple { background-color: #A435F0 !important; }
