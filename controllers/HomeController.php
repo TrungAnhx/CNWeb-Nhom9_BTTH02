@@ -1,9 +1,15 @@
 <?php
+// Gọi Model Course để lấy dữ liệu
+require_once 'models/Course.php';
+
 class HomeController {
     public function index() {
-        // Đây là trang chủ
-        echo "<h1>Chào mừng đến với Website Khóa Học Online</h1>";
-        echo "<p>File này nằm tại views/home/index.php (Cần tạo view để require vào)</p>";
+        // Khởi tạo model và lấy danh sách khóa học
+        $courseModel = new Course();
+        $courses = $courseModel->getAllApproved();
+
+        // Gọi View và truyền biến $courses sang đó
+        require 'views/home/index.php';
     }
 }
 ?>
