@@ -1,61 +1,104 @@
 <?php
-require_once 'config/Database.php';
+require_once 'models/Category.php';
 
 class AdminController {
-    private $db;
 
+    // Middleware đơn giản: Kiểm tra phải là Admin mới được vào
     public function __construct() {
-        // Kết nối Database
-        $database = new Database();
-        $this->db = $database->getConnection();
-
-        // Kiểm tra quyền Admin
-        if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 2) {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        // Nếu chưa đăng nhập hoặc role không phải 2 (Admin) -> Đá về login
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 2) {
             header("Location: index.php?controller=auth&action=login");
             exit();
         }
     }
 
     public function dashboard() {
-        // 1. Đếm tổng thành viên
-        $queryUser = "SELECT COUNT(*) as total FROM users";
-        $stmtUser = $this->db->prepare($queryUser);
-        $stmtUser->execute();
-        $totalUsers = $stmtUser->fetch(PDO::FETCH_ASSOC)['total'];
+        // Kết nối DB để đếm số liệu
+        $db = new Database();
+        $conn = $db->getConnection();
 
-        // 2. Đếm tổng khóa học
-        $queryCourse = "SELECT COUNT(*) as total FROM courses";
-        $stmtCourse = $this->db->prepare($queryCourse);
-        $stmtCourse->execute();
-        $totalCourses = $stmtCourse->fetch(PDO::FETCH_ASSOC)['total'];
+        // 1. Đếm số khóa học (Tất cả)
+        $stmt = $conn->prepare("SELECT COUNT(*) as total FROM courses");
+        $stmt->execute();
+        $countCourses = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
-        // 3. Tính tổng doanh thu (Join bảng Enrollments và Courses)
-        // (Lấy giá tiền của khóa học tương ứng với mỗi lượt đăng ký)
-        $queryRevenue = "SELECT SUM(c.price) as total_revenue 
-                         FROM enrollments e
-                         JOIN courses c ON e.course_id = c.id";
-        $stmtRevenue = $this->db->prepare($queryRevenue);
-        $stmtRevenue->execute();
-        $rowRevenue = $stmtRevenue->fetch(PDO::FETCH_ASSOC);
-        $totalRevenue = $rowRevenue['total_revenue'] ? $rowRevenue['total_revenue'] : 0;
+        // 2. Đếm số Giảng viên (role=1)
+        $stmt = $conn->prepare("SELECT COUNT(*) as total FROM users WHERE role = 1");
+        $stmt->execute();
+        $countInstructors = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
-        // Đóng gói dữ liệu để gửi sang View
-        $stats = [
-            'users' => $totalUsers,
-            'courses' => $totalCourses,
-            'revenue' => $totalRevenue
-        ];
-        
+        // 3. Đếm số Học viên (role=0)
+        $stmt = $conn->prepare("SELECT COUNT(*) as total FROM users WHERE role = 0");
+        $stmt->execute();
+        $countStudents = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+
         require 'views/admin/dashboard.php';
     }
-    
-    // Placeholder cho các action khác
-    public function users() {
-        echo "Trang quản lý user (Đang phát triển)";
+
+    // --- QUẢN LÝ DANH MỤC (CATEGORIES) ---
+
+    // 1. Xem danh sách
+    public function categories() {
+        $categoryModel = new Category();
+        $categories = $categoryModel->getAll();
+        require 'views/admin/categories/list.php';
     }
 
-    public function categories() {
-        echo "Trang quản lý danh mục (Đang phát triển)";
+    // 2. Thêm mới
+    public function createCategory() {
+        // Nếu submit form POST
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = $_POST['name'];
+            $description = $_POST['description'];
+
+            $categoryModel = new Category();
+            if ($categoryModel->create($name, $description)) {
+                header("Location: index.php?controller=admin&action=categories");
+            } else {
+                echo "Có lỗi xảy ra!";
+            }
+        } else {
+            // Nếu method GET -> Hiển thị form
+            require 'views/admin/categories/create.php';
+        }
+    }
+
+    // 3. Chỉnh sửa
+    public function editCategory() {
+        $id = isset($_GET['id']) ? $_GET['id'] : null;
+        $categoryModel = new Category();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = $_POST['name'];
+            $description = $_POST['description'];
+            
+            if ($categoryModel->update($id, $name, $description)) {
+                header("Location: index.php?controller=admin&action=categories");
+            } else {
+                echo "Lỗi update!";
+            }
+        } else {
+            // Lấy thông tin cũ để điền vào form
+            $category = $categoryModel->getById($id);
+            if (!$category) {
+                echo "Danh mục không tồn tại!";
+                exit();
+            }
+            require 'views/admin/categories/edit.php';
+        }
+    }
+
+    // 4. Xóa
+    public function deleteCategory() {
+        $id = isset($_GET['id']) ? $_GET['id'] : null;
+        if ($id) {
+            $categoryModel = new Category();
+            $categoryModel->delete($id);
+        }
+        header("Location: index.php?controller=admin&action=categories");
     }
 }
 ?>

@@ -1,4 +1,4 @@
-    </div> <!-- Đóng container của main -->
+    </div> <!-- Đóng div wrapper của main -->
 </main> <!-- Đóng main -->
 
 <footer>

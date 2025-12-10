@@ -1,107 +1,52 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/admin.css">
-</head>
-<body>
+<?php require_once 'views/layouts/header.php'; ?>
 
-<div id="wrapper">
+<!-- Container này sẽ thẳng hàng với Header/Footer -->
+<div class="container admin-layout">
+    
     <!-- Sidebar -->
-    <nav id="sidebar">
-        <div class="sidebar-brand">
-            <i class="fa-solid fa-graduation-cap"></i> ADMIN PANEL
-        </div>
-        <ul class="sidebar-menu">
-            <li>
-                <a href="index.php?controller=admin&action=dashboard" class="active">
-                    <i class="fa-solid fa-gauge-high"></i> Dashboard
-                </a>
-            </li>
-            <li>
-                <a href="index.php?controller=admin&action=users">
-                    <i class="fa-solid fa-users"></i> Quản lý Người dùng
-                </a>
-            </li>
-            <li>
-                <a href="index.php?controller=admin&action=categories">
-                    <i class="fa-solid fa-layer-group"></i> Danh mục Khóa học
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa-solid fa-book-open"></i> Phê duyệt Khóa học
-                </a>
-            </li>
-            <li>
-                <a href="index.php?controller=auth&action=logout" class="text-danger">
-                    <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <?php require_once 'views/layouts/admin_sidebar.php'; ?>
 
-    <!-- Page Content -->
-    <div id="content-wrapper">
-        <div id="header">
-            <h3>Tổng quan hệ thống</h3>
-            <div class="user-info">
-                Xin chào, <strong><?php echo $_SESSION['fullname'] ?? 'Admin'; ?></strong>
+    <!-- Nội dung chính -->
+    <main class="admin-content">
+        <h2 style="border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 30px; color: #333;">
+            <i class="fas fa-chart-line"></i> Tổng quan hệ thống
+        </h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px;">
+            <!-- Thẻ 1: Khóa học -->
+            <div style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; border-bottom: 4px solid #a435f0;">
+                <div style="font-size: 40px; color: #a435f0; margin-bottom: 10px;">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3 style="font-size: 36px; margin: 0; color: #333;"><?php echo $countCourses; ?></h3>
+                <p style="color: #666; margin-top: 5px;">Khóa học hiện có</p>
+            </div>
+
+            <!-- Thẻ 2: Học viên -->
+            <div style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; border-bottom: 4px solid #28a745;">
+                <div style="font-size: 40px; color: #28a745; margin-bottom: 10px;">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3 style="font-size: 36px; margin: 0; color: #333;"><?php echo $countStudents; ?></h3>
+                <p style="color: #666; margin-top: 5px;">Học viên</p>
+            </div>
+
+            <!-- Thẻ 3: Giảng viên -->
+            <div style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; border-bottom: 4px solid #dc3545;">
+                <div style="font-size: 40px; color: #dc3545; margin-bottom: 10px;">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3 style="font-size: 36px; margin: 0; color: #333;"><?php echo $countInstructors; ?></h3>
+                <p style="color: #666; margin-top: 5px;">Giảng viên</p>
             </div>
         </div>
 
-        <div id="main-content">
-            <div class="row">
-                <!-- Card 1 -->
-                <div class="col-md-4">
-                    <div class="stat-card">
-                        <div class="stat-info">
-                            <h4><?php echo $stats['users'] ?? 0; ?></h4>
-                            <p>Thành viên</p>
-                        </div>
-                        <div class="stat-icon text-purple">
-                            <i class="fa-solid fa-user-group"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="col-md-4">
-                    <div class="stat-card border-start border-4 border-success">
-                        <div class="stat-info">
-                            <h4><?php echo $stats['courses'] ?? 0; ?></h4>
-                            <p>Khóa học</p>
-                        </div>
-                        <div class="stat-icon text-success">
-                            <i class="fa-solid fa-video"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="col-md-4">
-                    <div class="stat-card border-start border-4 border-warning">
-                        <div class="stat-info">
-                            <h4><?php echo number_format($stats['revenue'] ?? 0); ?>đ</h4>
-                            <p>Doanh thu</p>
-                        </div>
-                        <div class="stat-icon text-warning">
-                            <i class="fa-solid fa-sack-dollar"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Khu vực nội dung chính sẽ thêm sau -->
-            <div class="mt-4 p-4 bg-white rounded shadow-sm">
-                <h5>Chào mừng trở lại trang quản trị!</h5>
-                <p class="text-muted">Chọn các chức năng bên menu trái để bắt đầu quản lý hệ thống.</p>
-            </div>
+        <!-- Phần hoạt động gần đây (Placeholder) -->
+        <div style="margin-top: 50px; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <h3><i class="fas fa-history"></i> Hoạt động gần đây</h3>
+            <p style="color: #777; font-style: italic; margin-top: 15px;">Hệ thống đang hoạt động ổn định. Chưa có cảnh báo nào.</p>
         </div>
-    </div>
+    </main>
 </div>
 
-</body>
-</html>
+<?php require_once 'views/layouts/footer.php'; ?>
