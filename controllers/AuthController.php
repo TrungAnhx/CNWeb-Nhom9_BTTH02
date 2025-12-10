@@ -1,69 +1,87 @@
 <?php
-require_once 'config/Database.php';
 require_once 'models/User.php';
 
 class AuthController {
-    private $db;
-    private $userModel;
 
     public function __construct() {
-        $database = new Database();
-        $this->db = $database->getConnection();
-        $this->userModel = new User($this->db);
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
     }
 
     public function login() {
         $error = '';
         
-        // Nếu user đã login rồi thì đá về Dashboard tương ứng
-        if (isset($_SESSION['user_id'])) {
-            $this->redirectUser($_SESSION['role']);
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
 
-            $result = $this->userModel->login($email, $password);
+            $userModel = new User();
+            $user = $userModel->login($email, $password);
 
-            if ($result === true) {
-                // Login thành công -> Lưu session
-                $_SESSION['user_id'] = $this->userModel->id;
-                $_SESSION['username'] = $this->userModel->username;
-                $_SESSION['fullname'] = $this->userModel->fullname;
-                $_SESSION['role'] = $this->userModel->role;
-                
-                $this->redirectUser($this->userModel->role);
-            } elseif ($result === "BANNED") {
-                $error = "Tài khoản của bạn đã bị vô hiệu hóa.";
+            if ($user === "BANNED") {
+                $error = "Tài khoản của bạn đã bị khóa!";
+            } elseif ($user) {
+                // Đăng nhập thành công -> Lưu session
+                $_SESSION['user'] = [
+                    'id' => $user['id'],
+                    'username' => $user['username'],
+                    'fullname' => $user['fullname'],
+                    'email' => $user['email'],
+                    'role' => $user['role'],
+                    'avatar' => $user['avatar']
+                ];
+
+                // Chuyển hướng theo quyền
+                if ($user['role'] == 2) { // Admin
+                    header("Location: index.php?controller=admin&action=dashboard");
+                } elseif ($user['role'] == 1) { // Giảng viên
+                    header("Location: index.php?controller=instructor&action=dashboard");
+                } else { // Học viên
+                    header("Location: index.php");
+                }
+                exit();
             } else {
-                $error = "Email hoặc mật khẩu không chính xác.";
+                $error = "Email hoặc mật khẩu không đúng!";
             }
         }
-
         require 'views/auth/login.php';
     }
 
     public function logout() {
-        session_unset();
         session_destroy();
         header("Location: index.php");
         exit();
     }
 
-    private function redirectUser($role) {
-        switch ($role) {
-            case 2: // Admin
-                header("Location: index.php?controller=admin&action=dashboard");
-                break;
-            case 1: // Instructor
-                header("Location: index.php?controller=instructor&action=dashboard");
-                break;
-            default: // Student
-                header("Location: index.php"); // Về trang chủ
-                break;
+    public function register() {
+        $error = '';
+        $success = '';
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $fullname = $_POST['fullname'];
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $confirm_password = $_POST['confirm_password'];
+            $role = 0; // Mặc định là học viên
+
+            if ($password !== $confirm_password) {
+                $error = "Mật khẩu nhập lại không khớp!";
+            } else {
+                $userModel = new User();
+                if ($userModel->emailExists($email)) {
+                    $error = "Email này đã được đăng ký!";
+                } else {
+                    if ($userModel->register($username, $email, $password, $fullname, $role)) {
+                        $success = "Đăng ký thành công! Vui lòng đăng nhập.";
+                    } else {
+                        $error = "Có lỗi xảy ra, vui lòng thử lại.";
+                    }
+                }
+            }
         }
-        exit();
+        require 'views/auth/register.php';
     }
 }
 ?>

@@ -61,4 +61,5 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <!-- Bắt đầu phần nội dung chính (Main Content) -->
 <main>
-    <div class="container">
+    <!-- Bỏ class container ở đây để trang con tự quyết định dùng container hay full-width -->
+    <div>

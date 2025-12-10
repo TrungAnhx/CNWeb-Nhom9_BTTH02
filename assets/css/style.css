@@ -98,11 +98,155 @@ nav {
     color: #ffffff !important;
 }
 
-/* --- MAIN CONTENT --- */
-main {
-    flex: 1; /* Đẩy footer xuống đáy */
-    padding: 40px 0;
+/* --- ADMIN LAYOUT --- */
+.admin-layout {
+    display: flex;
+    margin-top: 20px;
+    background: #fff; /* Nền trắng cho cả khối */
+    box-shadow: 0 0 10px rgba(0,0,0,0.05); /* Đổ bóng nhẹ */
+    min-height: 600px;
 }
+
+.sidebar {
+    width: 260px;
+    background: #2d2f31;
+    color: #fff;
+    padding: 30px 20px;
+    flex-shrink: 0;
+}
+
+.sidebar h3 {
+    color: #a435f0;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #444;
+}
+
+.sidebar ul li a {
+    color: #ccc;
+    display: block;
+    padding: 12px 15px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.sidebar ul li a:hover, .sidebar ul li a.active {
+    background: #3e4143;
+    color: #fff;
+    padding-left: 20px; /* Hiệu ứng đẩy nhẹ sang phải */
+    border-left: 3px solid #a435f0;
+}
+
+.admin-content {
+    flex: 1;
+    padding: 40px;
+    background: #f7f9fa;
+}
+
+/* --- MODERN TABLE STYLE --- */
+.card-box {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Bóng đậm hơn */
+    border: 1px solid #d1d7dc; /* Viền xám đậm hơn chút cho rõ */
+}
+
+.table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.table-custom thead th {
+    text-align: left;
+    background-color: #f7f9fa;
+    color: #2d2f31;
+    padding: 15px;
+    font-weight: 700;
+    border-bottom: 2px solid #d1d7dc;
+}
+
+/* Riêng cột cuối (Hành động) căn phải */
+.table-custom thead th:last-child {
+    text-align: right;
+    padding-right: 10px; /* Giảm padding để sát lề hơn */
+}
+.table-custom tbody td:last-child {
+    text-align: right; /* Đẩy nút sang phải */
+    padding-right: 10px;
+}
+
+.table-custom tbody td {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #333;
+    vertical-align: middle;
+}
+
+.table-custom tbody tr:hover {
+    background-color: #f0f4f9; 
+}
+
+.table-custom tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* --- BUTTON UDEMY STYLE --- */
+.btn-udemy {
+    background-color: #a435f0; 
+    color: #fff !important;
+    font-weight: 700;
+    padding: 10px 24px; /* To hơn chút */
+    border: 1px solid #a435f0;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease; /* Mượt mà */
+}
+
+.btn-udemy:hover {
+    background-color: #521782; /* Tím rất đậm khi hover */
+    border-color: #521782;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Thêm bóng khi hover */
+    transform: translateY(-1px); /* Nổi lên nhẹ */
+}
+
+/* Fix nút Sửa/Xóa trong bảng */
+table .btn {
+    border: none !important; 
+    padding: 4px 8px; /* Giảm padding cho gọn */
+    font-size: 12px; 
+    border-radius: 50px; 
+    display: inline-block;
+    margin: 0 2px;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    line-height: 1.4;
+    box-shadow: none !important;
+    min-width: 45px; /* Giảm độ rộng tối thiểu xuống */
+    text-align: center;
+}
+
+
+table .btn-edit {
+    background-color: #ffc107; /* Vàng */
+    color: #212529;
+}
+table .btn-edit:hover { background-color: #e0a800; color: #000; }
+
+table .btn-delete {
+    background-color: #dc3545; /* Đỏ */
+    color: #fff;
+}
+table .btn-delete:hover { background-color: #c82333; color: #fff; }
 
 /* --- FOOTER --- */
 footer {
