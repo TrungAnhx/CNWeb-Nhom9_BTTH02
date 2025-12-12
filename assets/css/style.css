@@ -175,11 +175,11 @@ nav {
 /* Riêng cột cuối (Hành động) căn phải */
 .table-custom thead th:last-child {
     text-align: right;
-    padding-right: 10px; /* Giảm padding để sát lề hơn */
+    padding-right: 40px; /* Tăng lên để chữ Hành động dịch vào trong */
 }
 .table-custom tbody td:last-child {
     text-align: right; /* Đẩy nút sang phải */
-    padding-right: 10px;
+    padding-right: 25px; /* Dịch ra ngoài chút cho cân với chữ Hành động */
 }
 
 .table-custom tbody td {
