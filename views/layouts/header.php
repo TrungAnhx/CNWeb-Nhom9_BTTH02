@@ -29,15 +29,10 @@ if (session_status() === PHP_SESSION_NONE) {
 
             <!-- Menu Chính -->
             <div class="nav-links">
+                <!-- 1. Các Link điều hướng (Luôn hiển thị trước) -->
                 <a href="index.php?controller=course&action=index">Khóa học</a>
                 
-                <!-- Logic hiển thị theo trạng thái đăng nhập -->
                 <?php if (isset($_SESSION['user'])): ?>
-                    <!-- ĐÃ ĐĂNG NHẬP -->
-                    <span style="color: #a435f0; font-weight: bold;">
-                        Xin chào, <?php echo htmlspecialchars($_SESSION['user']['fullname']); ?>
-                    </span>
-
                     <!-- Link Dashboard tuỳ theo Role -->
                     <?php if ($_SESSION['user']['role'] == 2): // Admin ?>
                         <a href="index.php?controller=admin&action=dashboard">Quản trị</a>
@@ -46,6 +41,11 @@ if (session_status() === PHP_SESSION_NONE) {
                     <?php else: // Học viên ?>
                         <a href="index.php?controller=student&action=dashboard">Học tập</a>
                     <?php endif; ?>
+
+                    <!-- 2. Thông tin User & Đăng xuất (Nằm cuối cùng) -->
+                    <span style="color: #a435f0; font-weight: bold; margin-left: 15px;">
+                        Xin chào, <?php echo htmlspecialchars($_SESSION['user']['fullname']); ?>
+                    </span>
 
                     <a href="index.php?controller=auth&action=logout" class="btn btn-login" style="border: none; color: red;">Đăng xuất</a>
 

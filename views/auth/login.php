@@ -13,7 +13,9 @@
         <form action="index.php?controller=auth&action=login" method="POST">
             <div style="margin-bottom: 20px;">
                 <label style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px;">Email</label>
-                <input type="email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;">
+                <input type="email" name="email" 
+                       value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" 
+                       required style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;">
             </div>
 
             <div style="margin-bottom: 25px;">
