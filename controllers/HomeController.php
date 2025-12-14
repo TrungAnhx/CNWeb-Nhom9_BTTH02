@@ -20,7 +20,7 @@ class HomeController {
             $courses = [];
         }
 
-        require 'views/home/index.php';
+        require 'views/student/home.php';
     }
 }
 ?>

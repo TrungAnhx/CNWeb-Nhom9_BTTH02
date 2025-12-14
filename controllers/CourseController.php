@@ -16,14 +16,14 @@ class CourseController {
      * Trang chủ khóa học (cho học viên)
      */
     public function index() {
-        require 'views/courses/index.php';
+        require 'views/student/courses.php';
     }
     
     /**
      * Chi tiết khóa học (cho học viên)
      */
     public function detail() {
-        require 'views/courses/detail.php';
+        require 'views/student/course_detail.php';
     }
     
     /**
