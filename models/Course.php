@@ -10,8 +10,6 @@ class Course {
     
     /**
      * Lấy tất cả khóa học của 1 giảng viên
-     * @param int $instructorId - ID của giảng viên
-     * @return array - Danh sách khóa học
      */
     public function getCoursesByInstructor($instructorId) {
         $sql = "SELECT c.*, 
@@ -30,8 +28,6 @@ class Course {
     
     /**
      * Lấy chi tiết 1 khóa học theo ID
-     * @param int $id - ID khóa học
-     * @return array|false
      */
     public function getCourseById($id) {
         $sql = "SELECT c.*, 
@@ -49,8 +45,6 @@ class Course {
     
     /**
      * Tạo khóa học mới
-     * @param array $data - Dữ liệu khóa học
-     * @return int - ID khóa học vừa tạo
      */
     public function createCourse($data) {
         $sql = "INSERT INTO courses (title, description, instructor_id, category_id, price, 
@@ -75,9 +69,6 @@ class Course {
     
     /**
      * Cập nhật khóa học
-     * @param int $id - ID khóa học
-     * @param array $data - Dữ liệu cập nhật
-     * @return bool
      */
     public function updateCourse($id, $data) {
         $sql = "UPDATE courses 
@@ -99,10 +90,7 @@ class Course {
     }
     
     /**
-     * Xóa khóa học (chỉ nếu là của giảng viên này)
-     * @param int $id - ID khóa học
-     * @param int $instructorId - ID giảng viên
-     * @return bool
+     * Xóa khóa học
      */
     public function deleteCourse($id, $instructorId) {
         $sql = "DELETE FROM courses WHERE id = ? AND instructor_id = ?";
@@ -112,8 +100,6 @@ class Course {
     
     /**
      * Lấy thống kê của giảng viên
-     * @param int $instructorId
-     * @return array
      */
     public function getInstructorStatistics($instructorId) {
         $sql = "SELECT 
@@ -131,31 +117,25 @@ class Course {
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$instructorId, $instructorId]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
-    private $conn;
-    private $table_name = "courses";
-
-    public function __construct() {
-        $database = new Database();
-        $this->conn = $database->getConnection();
     }
 
-    // Lấy danh sách khóa học đã được duyệt để hiện trang chủ
+    /**
+     * Lấy danh sách khóa học đã được duyệt
+     */
     public function getAllApproved() {
-        // Query có JOIN để lấy thêm tên giảng viên (fullname) từ bảng users
         $query = "SELECT 
                     c.id, c.title, c.price, c.image, c.level, c.duration_weeks,
                     u.fullname as instructor_name 
-                  FROM " . $this->table_name . " c
+                  FROM courses c
                   LEFT JOIN users u ON c.instructor_id = u.id
                   WHERE c.status = 'approved'
                   ORDER BY c.created_at DESC";
 
         try {
-            $stmt = $this->conn->prepare($query);
+            $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch(PDOException $e) {
-            echo "Lỗi truy vấn: " . $e->getMessage();
             return [];
         }
     }

@@ -37,11 +37,6 @@ class User {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function __construct() {
-        $database = new Database();
-        $this->conn = $database->getConnection();
-    }
-
     // --- CÁC HÀM AUTH (Giữ nguyên) ---
     public function register($username, $email, $password, $fullname, $role = 0) {
         $query = "INSERT INTO " . $this->table_name . " (username, email, password, fullname, role) VALUES (:username, :email, :password, :fullname, :role)";
