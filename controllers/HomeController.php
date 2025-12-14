@@ -4,6 +4,7 @@ require_once 'models/Course.php';
 
 class HomeController {
     public function index() {
+        // Đây là trang chủ
         // Khởi tạo model và lấy danh sách khóa học
         $courseModel = new Course();
         $courses = $courseModel->getAllApproved();
