@@ -112,7 +112,11 @@
                                     <?php endif; ?>
                                 </td>
                                 <td class="text-center">
-                                    <span class="badge badge-info"><?php echo $lesson['material_count']; ?> files</span>
+                                    <span class="badge badge-info" 
+                                          style="cursor: pointer;" 
+                                          onclick="toggleMaterials(<?php echo $lesson['id']; ?>)">
+                                        <?php echo $lesson['material_count']; ?> files
+                                    </span>
                                 </td>
                                 <td>
                                     <div class="action-buttons">
@@ -127,6 +131,75 @@
                                     </div>
                                 </td>
                             </tr>
+                            
+                            <!-- Material Management Row (hidden by default) -->
+                            <tr id="materials-<?php echo $lesson['id']; ?>" class="materials-row" style="display: none;">
+                                <td colspan="5">
+                                    <div class="materials-container">
+                                        <div class="materials-header">
+                                            <h4>📎 Tài liệu đính kèm</h4>
+                                            <button onclick="showAddMaterialForm(<?php echo $lesson['id']; ?>)" class="btn-add-material">
+                                                + Thêm link tài liệu
+                                            </button>
+                                        </div>
+                                        
+                                        <!-- Add Material Form (hidden by default) -->
+                                        <div id="add-form-<?php echo $lesson['id']; ?>" class="add-material-form" style="display: none;">
+                                            <form method="POST" action="<?php echo BASE_URL; ?>/?controller=material&action=store">
+                                                <input type="hidden" name="lesson_id" value="<?php echo $lesson['id']; ?>">
+                                                <div class="form-row">
+                                                    <input type="text" name="filename" placeholder="Tên tài liệu (VD: Slide bài giảng)" required>
+                                                    <input type="url" name="file_path" placeholder="Link tài liệu (VD: https://drive.google.com/...)" required>
+                                                    <button type="submit" class="btn-save">Lưu</button>
+                                                    <button type="button" onclick="hideAddMaterialForm(<?php echo $lesson['id']; ?>)" class="btn-cancel">Hủy</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
+                                        <!-- Materials List -->
+                                        <div class="materials-list">
+                                            <?php 
+                                            $materialModel = new Material();
+                                            $materials = $materialModel->getMaterialsByLesson($lesson['id']);
+                                            if (empty($materials)): 
+                                            ?>
+                                                <p class="no-materials">Chưa có tài liệu nào. Nhấn nút "Thêm link tài liệu" để thêm.</p>
+                                            <?php else: ?>
+                                                <?php foreach ($materials as $material): ?>
+                                                    <div class="material-item">
+                                                        <div class="material-info">
+                                                            <span class="material-icon">
+                                                                <?php 
+                                                                switch($material['file_type']) {
+                                                                    case 'pdf': echo '📄'; break;
+                                                                    case 'doc': echo '📝'; break;
+                                                                    case 'ppt': echo '📊'; break;
+                                                                    case 'github': echo '💻'; break;
+                                                                    case 'drive': echo '☁️'; break;
+                                                                    default: echo '🔗';
+                                                                }
+                                                                ?>
+                                                            </span>
+                                                            <div>
+                                                                <strong><?php echo htmlspecialchars($material['filename']); ?></strong>
+                                                                <br>
+                                                                <a href="<?php echo htmlspecialchars($material['file_path']); ?>" 
+                                                                   target="_blank" class="material-link">
+                                                                    <?php echo htmlspecialchars($material['file_path']); ?>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <button onclick="deleteMaterial(<?php echo $material['id']; ?>, '<?php echo htmlspecialchars($material['filename']); ?>')" 
+                                                                class="btn-delete-material">
+                                                            🗑️
+                                                        </button>
+                                                    </div>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
@@ -138,6 +211,31 @@
         function confirmDelete(lessonId, lessonTitle) {
             if (confirm(`⚠️ Bạn có chắc muốn xóa bài học "${lessonTitle}"?\n\nThao tác này sẽ xóa tất cả tài liệu liên quan!`)) {
                 window.location.href = `<?php echo BASE_URL; ?>/?controller=lesson&action=delete&id=${lessonId}`;
+            }
+        }
+        
+        function toggleMaterials(lessonId) {
+            const row = document.getElementById('materials-' + lessonId);
+            if (row.style.display === 'none') {
+                row.style.display = 'table-row';
+            } else {
+                row.style.display = 'none';
+            }
+        }
+        
+        function showAddMaterialForm(lessonId) {
+            const form = document.getElementById('add-form-' + lessonId);
+            form.style.display = 'block';
+        }
+        
+        function hideAddMaterialForm(lessonId) {
+            const form = document.getElementById('add-form-' + lessonId);
+            form.style.display = 'none';
+        }
+        
+        function deleteMaterial(materialId, materialName) {
+            if (confirm(`⚠️ Xóa tài liệu "${materialName}"?`)) {
+                window.location.href = `<?php echo BASE_URL; ?>/?controller=material&action=delete&id=${materialId}`;
             }
         }
     </script>
@@ -284,6 +382,162 @@
 
         .btn-delete:hover {
             background: #dc3545;
+        }
+        
+        /* Materials Styles */
+        .materials-row {
+            background: #f7f9fa;
+        }
+        
+        .materials-container {
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            margin: 10px;
+        }
+        
+        .materials-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .materials-header h4 {
+            margin: 0;
+            color: #1c1d1f;
+            font-size: 16px;
+        }
+        
+        .btn-add-material {
+            background: #5624d0;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .btn-add-material:hover {
+            background: #3d1a9f;
+        }
+        
+        .add-material-form {
+            background: #f7f9fa;
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .form-row input[type="text"],
+        .form-row input[type="url"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .btn-save {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .btn-save:hover {
+            background: #218838;
+        }
+        
+        .btn-cancel {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .btn-cancel:hover {
+            background: #5a6268;
+        }
+        
+        .materials-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .no-materials {
+            color: #6a6f73;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .material-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+        }
+        
+        .material-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .material-info {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            flex: 1;
+        }
+        
+        .material-icon {
+            font-size: 24px;
+        }
+        
+        .material-link {
+            color: #5624d0;
+            font-size: 13px;
+            word-break: break-all;
+            max-width: 600px;
+            display: inline-block;
+        }
+        
+        .material-link:hover {
+            text-decoration: underline;
+        }
+        
+        .btn-delete-material {
+            background: white;
+            border: 1px solid #dc3545;
+            color: #dc3545;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn-delete-material:hover {
+            background: #dc3545;
+            color: white;
         }
     </style>
 </body>

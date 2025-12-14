@@ -80,9 +80,56 @@ INSERT INTO enrollments (course_id, student_id, status, progress) VALUES
 (2, (SELECT id FROM users WHERE username='admin'), 'active', 50);
 
 -- ================================================
+-- THÊM MATERIALS (TÀI LIỆU ĐÍNH KÈM)
+-- ================================================
+
+-- Materials cho Course 1 (PHP) - Lesson 1
+INSERT INTO materials (lesson_id, filename, file_path, file_type) VALUES 
+(1, 'Slide giới thiệu PHP', 'https://drive.google.com/file/d/1aBcDeFgHiJkLmNoPqRsTuVwXyZ123456/view', 'drive'),
+(1, 'Tài liệu chính thức PHP', 'https://www.php.net/manual/en/getting-started.php', 'link'),
+(1, 'Source code ví dụ', 'https://github.com/php/php-src', 'github');
+
+-- Materials cho Course 1 - Lesson 2
+INSERT INTO materials (lesson_id, filename, file_path, file_type) VALUES 
+(2, 'XAMPP Installation Guide', 'https://www.apachefriends.org/download.html', 'link'),
+(2, 'Video hướng dẫn cài XAMPP', 'https://www.youtube.com/watch?v=h6DEDm7C37A', 'link');
+
+-- Materials cho Course 1 - Lesson 3
+INSERT INTO materials (lesson_id, filename, file_path, file_type) VALUES 
+(3, 'PHP Data Types Cheat Sheet', 'https://drive.google.com/file/d/1XyZaBcDeFgHiJkLmNoPqRsTuVwXyZ789/view', 'drive'),
+(3, 'Bài tập thực hành biến', 'https://github.com/username/php-exercises/blob/main/variables.php', 'github');
+
+-- Materials cho Course 2 (MySQL) - Lesson 1
+INSERT INTO materials (lesson_id, filename, file_path, file_type) VALUES 
+(7, 'MySQL Documentation', 'https://dev.mysql.com/doc/', 'link'),
+(7, 'Database Design Best Practices', 'https://drive.google.com/file/d/2AbCdEfGhIjKlMnOpQrStUvWxYz987654/view', 'drive');
+
+-- Materials cho Course 2 - Lesson 2
+INSERT INTO materials (lesson_id, filename, file_path, file_type) VALUES 
+(8, 'SQL CREATE TABLE Examples', 'https://github.com/username/sql-examples/blob/main/create-table.sql', 'github'),
+(8, 'ERD Design Tool', 'https://www.lucidchart.com/pages/database-diagram/database-design', 'link');
+
+-- Materials cho Course 2 - Lesson 3
+INSERT INTO materials (lesson_id, filename, file_path, file_type) VALUES 
+(9, 'SQL SELECT Queries Cheat Sheet', 'https://drive.google.com/file/d/3CdEfGhIjKlMnOpQrStUvWxYzAbC123456/view', 'drive'),
+(9, 'Practice SQL Queries', 'https://www.w3schools.com/sql/sql_select.asp', 'link');
+
+-- Materials cho Course 3 (JavaScript) - Lesson 1
+INSERT INTO materials (lesson_id, filename, file_path, file_type) VALUES 
+(11, 'JavaScript ES6 Features', 'https://github.com/lukehoban/es6features', 'github'),
+(11, 'Arrow Functions Tutorial', 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions', 'link');
+
+-- Materials cho Course 3 - Lesson 2
+INSERT INTO materials (lesson_id, filename, file_path, file_type) VALUES 
+(12, 'Async/Await Examples', 'https://github.com/username/async-examples', 'github'),
+(12, 'Promise Documentation', 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise', 'link'),
+(12, 'JavaScript Async Patterns', 'https://drive.google.com/file/d/4DeF gHiJkLmNoPqRsTuVwXyZaBcD456789/view', 'drive');
+
+-- ================================================
 -- KẾT QUẢ:
 -- - 3 courses
--- - Course 1: 6 lessons (PHP)
--- - Course 2: 4 lessons (MySQL)  
--- - Course 3: 2 lessons (JavaScript)
+-- - Course 1: 6 lessons (PHP) + 7 materials
+-- - Course 2: 4 lessons (MySQL) + 5 materials
+-- - Course 3: 2 lessons (JavaScript) + 4 materials
+-- - TỔNG: 12 lessons + 16 materials
 -- ================================================
