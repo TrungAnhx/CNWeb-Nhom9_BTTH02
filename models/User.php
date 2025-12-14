@@ -40,14 +40,19 @@ class User {
     // --- CÁC HÀM AUTH (Giữ nguyên) ---
     public function register($username, $email, $password, $fullname, $role = 0) {
         $query = "INSERT INTO " . $this->table_name . " (username, email, password, fullname, role) VALUES (:username, :email, :password, :fullname, :role)";
-        $stmt = $this->conn->prepare($query);
-        // Lưu ý: Đang tắt Hash để test theo yêu cầu của bạn
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $password);
-        $stmt->bindParam(':fullname', $fullname);
-        $stmt->bindParam(':role', $role);
-        return $stmt->execute();
+        try {
+            $stmt = $this->conn->prepare($query);
+            // Lưu ý: Đang tắt Hash để test theo yêu cầu của bạn
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':fullname', $fullname);
+            $stmt->bindParam(':role', $role);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            // Nếu có lỗi ràng buộc (ví dụ username/email duplicate), trả về false
+            return false;
+        }
     }
 
     public function login($email, $password) {
@@ -71,6 +76,17 @@ class User {
         $query = "SELECT id FROM " . $this->table_name . " WHERE email = ? LIMIT 1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $email);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
+
+    /**
+     * Kiểm tra username đã tồn tại chưa
+     */
+    public function usernameExists($username) {
+        $query = "SELECT id FROM " . $this->table_name . " WHERE username = ? LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $username);
         $stmt->execute();
         return $stmt->rowCount() > 0;
     }

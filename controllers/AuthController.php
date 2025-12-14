@@ -68,6 +68,8 @@ class AuthController {
             } else {
                 if ($this->userModel->emailExists($email)) {
                     $error = "Email này đã được đăng ký!";
+                } elseif ($this->userModel->usernameExists($username)) {
+                    $error = "Tên đăng nhập này đã có người sử dụng, vui lòng chọn tên khác.";
                 } else {
                     if ($this->userModel->register($username, $email, $password, $fullname, $role)) {
                         $success = "Đăng ký thành công! Vui lòng đăng nhập.";
