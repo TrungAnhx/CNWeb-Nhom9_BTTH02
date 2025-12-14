@@ -19,6 +19,9 @@ if ($project_folder === '/' || $project_folder === '\\') {
     $project_folder = '';
 }
 
+// Define BASE_URL for assets (CSS, JS, images)
+define('BASE_URL', $project_folder);
+
 // Simple Router - Support both query string và clean URL
 $controller = 'home';
 $action = 'index';

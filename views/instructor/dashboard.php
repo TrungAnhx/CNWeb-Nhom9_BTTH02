@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Giảng viên - Khóa học của tôi</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/instructor.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/css/instructor.css">
 </head>
 <body>
     <!-- Header với nút đăng xuất -->
@@ -18,12 +18,27 @@
                 <span class="user-info">
                     👤 <?php echo htmlspecialchars($_SESSION['fullname'] ?? $_SESSION['username']); ?>
                 </span>
-                <a href="logout.php" class="btn-logout">Đăng xuất</a>
+                <a href="<?php echo BASE_URL; ?>/logout.php" class="btn-logout">Đăng xuất</a>
             </div>
         </div>
     </header>
     
     <div class="instructor-container">
+        <!-- Success/Error Messages -->
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="alert alert-success">
+                ✅ <?php echo htmlspecialchars($_SESSION['success']); ?>
+            </div>
+            <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
+        
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert alert-error">
+                ❌ <?php echo htmlspecialchars($_SESSION['error']); ?>
+            </div>
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
+        
         <!-- Stats Overview -->
         <div class="stats-overview">
             <div class="stat-card">
@@ -47,7 +62,7 @@
         <!-- Page Header -->
         <div class="page-header">
             <h1>Khóa học của tôi</h1>
-            <a href="?controller=course&action=create" class="btn-primary">
+            <a href="<?php echo BASE_URL; ?>/?controller=course&action=create" class="btn-primary">
                 <span class="icon">+</span> Tạo khóa học mới
             </a>
         </div>
@@ -99,7 +114,7 @@
                         <!-- Course Image -->
                         <div class="course-image">
                             <?php if (!empty($course['image'])): ?>
-                                <img src="uploads/courses/<?php echo htmlspecialchars($course['image']); ?>" 
+                                <img src="<?php echo BASE_URL; ?>/uploads/courses/<?php echo htmlspecialchars($course['image']); ?>" 
                                      alt="<?php echo htmlspecialchars($course['title']); ?>">
                             <?php else: ?>
                                 <div class="no-image">📖</div>
@@ -148,15 +163,15 @@
 
                         <!-- Course Actions -->
                         <div class="course-actions">
-                            <a href="?controller=course&action=edit&id=<?php echo $course['id']; ?>" 
+                            <a href="<?php echo BASE_URL; ?>/?controller=course&action=edit&id=<?php echo $course['id']; ?>" 
                                class="btn-action btn-edit" title="Chỉnh sửa">
                                 ✏️ Sửa
                             </a>
-                            <a href="?controller=lesson&action=manage&course_id=<?php echo $course['id']; ?>" 
+                            <a href="<?php echo BASE_URL; ?>/?controller=lesson&action=manage&course_id=<?php echo $course['id']; ?>" 
                                class="btn-action btn-lessons" title="Quản lý bài học">
                                 📚 Bài học
                             </a>
-                            <a href="?controller=course&action=students&id=<?php echo $course['id']; ?>" 
+                            <a href="<?php echo BASE_URL; ?>/?controller=course&action=students&id=<?php echo $course['id']; ?>" 
                                class="btn-action btn-students" title="Xem học viên">
                                 👥 Học viên
                             </a>
@@ -175,7 +190,7 @@
         // Xác nhận xóa khóa học
         function confirmDelete(courseId, courseTitle) {
             if (confirm(`⚠️ Bạn có chắc muốn xóa khóa học "${courseTitle}"?\n\nThao tác này sẽ xóa toàn bộ bài học và dữ liệu học viên!`)) {
-                window.location.href = `?controller=course&action=delete&id=${courseId}`;
+                window.location.href = `<?php echo BASE_URL; ?>/?controller=course&action=delete&id=${courseId}`;
             }
         }
 

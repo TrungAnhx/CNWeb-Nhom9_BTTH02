@@ -1,0 +1,11 @@
+# Chặn thực thi PHP trong thư mục uploads để bảo mật
+<FilesMatch "\.php$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Cho phép tải xuống các file tài liệu
+<FilesMatch "\.(jpg|jpeg|png|gif|pdf|doc|docx|ppt|pptx|zip)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>

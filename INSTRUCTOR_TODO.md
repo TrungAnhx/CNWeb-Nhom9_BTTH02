@@ -63,32 +63,32 @@ Phần Instructor chịu trách nhiệm về **luồng nghiệp vụ chính** c�
 
 ---
 
-#### 2.2. TẠO KHÓA HỌC MỚI (CREATE)
+#### 2.2. TẠO KHÓA HỌC MỚI (CREATE) ✅ HOÀN THÀNH
 **File:** `views/instructor/course/create.php`
 
-- [ ] **Form tạo khóa học:**
-  - Tiêu đề (title) - required
-  - Mô tả (description) - textarea
-  - Danh mục (category_id) - dropdown từ DB
-  - Giá (price) - number
-  - Thời lượng (duration_weeks)
-  - Cấp độ (level) - select: Beginner/Intermediate/Advanced
-  - Upload ảnh thumbnail (image)
+- [x] **Form tạo khóa học:**
+  - Tiêu đề (title) - required ✅
+  - Mô tả (description) - textarea ✅
+  - Danh mục (category_id) - dropdown từ DB ✅
+  - Giá (price) - number ✅
+  - Thời lượng (duration_weeks) ✅
+  - Cấp độ (level) - select: Beginner/Intermediate/Advanced ✅
+  - Upload ảnh thumbnail (image) ✅
 
-- [ ] **Validation:**
-  - Kiểm tra các trường bắt buộc
-  - Validate định dạng ảnh (jpg, png, gif)
-  - Giới hạn kích thước ảnh (max 2MB)
+- [x] **Validation:**
+  - Kiểm tra các trường bắt buộc ✅
+  - Validate định dạng ảnh (jpg, png, gif) ✅
+  - Giới hạn kích thước ảnh (max 2MB) ✅
 
-- [ ] **Xử lý upload ảnh:**
-  - Lưu vào thư mục `uploads/courses/`
-  - Đổi tên file để tránh trùng lặp
-  - Lưu đường dẫn vào DB
+- [x] **Xử lý upload ảnh:**
+  - Lưu vào thư mục `uploads/courses/` ✅
+  - Đổi tên file để tránh trùng lặp ✅
+  - Lưu đường dẫn vào DB ✅
 
-- [ ] **Lưu vào Database:**
-  - Insert vào bảng `courses`
-  - Gán `instructor_id` = user đang đăng nhập
-  - Mặc định `status` = 'draft'
+- [x] **Lưu vào Database:**
+  - Insert vào bảng `courses` ✅
+  - Gán `instructor_id` = user đang đăng nhập ✅
+  - Mặc định `status` = 'draft' ✅
 
 #### File cần tạo/sửa:
 - `controllers/CourseController.php` → Methods:
@@ -100,23 +100,23 @@ Phần Instructor chịu trách nhiệm về **luồng nghiệp vụ chính** c�
 
 ---
 
-#### 2.3. SỬA KHÓA HỌC (EDIT/UPDATE)
+#### 2.3. SỬA KHÓA HỌC (EDIT/UPDATE) ✅ HOÀN THÀNH
 **File:** `views/instructor/course/edit.php`
 
-- [ ] **Load dữ liệu khóa học:**
-  - Lấy course theo ID từ URL
-  - Kiểm tra quyền: Chỉ giảng viên sở hữu mới được sửa
-  - Hiển thị form với dữ liệu đã điền sẵn
+- [x] **Load dữ liệu khóa học:**
+  - Lấy course theo ID từ URL ✅
+  - Kiểm tra quyền: Chỉ giảng viên sở hữu mới được sửa ✅
+  - Hiển thị form với dữ liệu đã điền sẵn ✅
 
-- [ ] **Form giống Create nhưng:**
-  - Có ảnh cũ hiển thị
-  - Cho phép upload ảnh mới (optional)
-  - Nếu upload ảnh mới → Xóa ảnh cũ
+- [x] **Form giống Create nhưng:**
+  - Có ảnh cũ hiển thị ✅
+  - Cho phép upload ảnh mới (optional) ✅
+  - Nếu upload ảnh mới → Xóa ảnh cũ ✅
 
-- [ ] **Xử lý cập nhật:**
-  - Validate dữ liệu
-  - Update vào DB
-  - Redirect về danh sách khóa học
+- [x] **Xử lý cập nhật:**
+  - Validate dữ liệu ✅
+  - Update vào DB ✅
+  - Redirect về danh sách khóa học ✅
 
 #### File cần tạo/sửa:
 - `controllers/CourseController.php` → Methods:
@@ -129,19 +129,19 @@ Phần Instructor chịu trách nhiệm về **luồng nghiệp vụ chính** c�
 
 ---
 
-#### 2.4. XÓA KHÓA HỌC (DELETE)
+#### 2.4. XÓA KHÓA HỌC (DELETE) ✅ HOÀN THÀNH
 **File:** `controllers/CourseController.php`
 
-- [ ] **Xử lý xóa khóa học:**
-  - Kiểm tra quyền sở hữu
-  - Xóa ảnh thumbnail khỏi server
-  - Xóa tất cả bài học liên quan (CASCADE)
-  - Xóa tất cả enrollments liên quan
-  - Xóa course khỏi DB
+- [x] **Xử lý xóa khóa học:**
+  - Kiểm tra quyền sở hữu ✅
+  - Xóa ảnh thumbnail khỏi server (CASCADE trong DB)
+  - Xóa tất cả bài học liên quan (CASCADE) ✅
+  - Xóa tất cả enrollments liên quan (CASCADE) ✅
+  - Xóa course khỏi DB ✅
 
-- [ ] **Xác nhận trước khi xóa:**
-  - JavaScript confirm dialog
-  - Hiển thị cảnh báo: "Xóa khóa học sẽ xóa tất cả bài học và dữ liệu học viên"
+- [x] **Xác nhận trước khi xóa:**
+  - JavaScript confirm dialog ✅
+  - Hiển thị cảnh báo: "Xóa khóa học sẽ xóa tất cả bài học và dữ liệu học viên" ✅
 
 #### File cần tạo/sửa:
 - `controllers/CourseController.php` → Method `delete($id)`
@@ -374,10 +374,10 @@ class Enrollment {
 
 | File | Trạng thái | Mô tả |
 |------|-----------|-------|
-| `dashboard.php` | ❌ Chưa làm | Dashboard tổng quan |
-| `my_courses.php` | ❌ Chưa làm | Danh sách khóa học |
-| `course/create.php` | ❌ Chưa làm | Form tạo khóa học |
-| `course/edit.php` | ❌ Chưa làm | Form sửa khóa học |
+| `dashboard.php` | ✅ Hoàn thành | Dashboard tổng quan với stats, search, filter |
+| `my_courses.php` | ✅ Hoàn thành | Giống dashboard (alias) |
+| `course/create.php` | ✅ Hoàn thành | Form tạo khóa học (style Udemy) |
+| `course/edit.php` | ✅ Hoàn thành | Form sửa khóa học (style Udemy) |
 | `course/manage.php` | ❌ Chưa làm | Chi tiết quản lý 1 khóa |
 | `lessons/manage.php` | ❌ Chưa làm | Danh sách bài học |
 | `lessons/create.php` | ❌ Chưa làm | Form tạo bài học |
@@ -391,37 +391,37 @@ class Enrollment {
 
 ### 📁 controllers/CourseController.php
 
-**Các method cần implement:**
+**Các method đã implement:**
 
 ```php
 class CourseController {
     // Hiển thị trang chủ khóa học (cho học viên)
-    public function index() { ... }
+    public function index() { ... } ⏳ Student làm
     
     // Chi tiết khóa học (cho học viên)
-    public function detail($id) { ... }
+    public function detail($id) { ... } ⏳ Student làm
     
-    // ===== INSTRUCTOR =====
+    // ===== INSTRUCTOR ===== ✅ HOÀN THÀNH
     // Dashboard giảng viên
-    public function instructorDashboard() { ... }
+    public function dashboard() { ... } ✅
     
     // Danh sách khóa học của giảng viên
-    public function myCourses() { ... }
+    public function myCourses() { ... } ✅
     
     // Form tạo khóa học
-    public function create() { ... }
+    public function create() { ... } ✅
     
     // Xử lý tạo khóa học (POST)
-    public function store() { ... }
+    public function store() { ... } ✅
     
     // Form sửa khóa học
-    public function edit($id) { ... }
+    public function edit($id) { ... } ✅
     
     // Xử lý cập nhật (POST)
-    public function update($id) { ... }
+    public function update($id) { ... } ✅
     
     // Xóa khóa học
-    public function delete($id) { ... }
+    public function delete($id) { ... } ✅
 }
 ```
 
@@ -490,16 +490,16 @@ class LessonController {
 
 ---
 
-## 📂 CẤU TRÚC THƯ MỤC CẦN TẠO
+## 📂 CẤU TRÚC THƯ MỤC CẦN TẠO ✅ HOÀN THÀNH
 
 ```
 uploads/
-├── courses/          # Ảnh thumbnail khóa học
-├── materials/        # Tài liệu đính kèm
-└── avatars/          # Ảnh đại diện user (nếu có)
+├── courses/          # Ảnh thumbnail khóa học ✅
+├── materials/        # Tài liệu đính kèm ✅
+└── avatars/          # Ảnh đại diện user (nếu có) ⏳
 ```
 
-**Lưu ý:** Thêm file `.htaccess` trong `uploads/` để bảo vệ:
+**Lưu ý:** Đã thêm file `.htaccess` trong `uploads/` để bảo vệ: ✅
 
 ```apache
 # Chặn execute PHP trong thư mục uploads
@@ -646,11 +646,11 @@ uploads/
 
 ## ✅ CHECKLIST HOÀN THÀNH
 
-### Phase 1: Core Setup
-- [ ] Models hoàn thành và tested
-- [ ] Database connection hoạt động
-- [ ] CRUD Courses hoàn chỉnh
-- [ ] Upload ảnh hoạt động
+### Phase 1: Core Setup ✅ HOÀN THÀNH
+- [x] Models hoàn thành và tested ✅
+- [x] Database connection hoạt động ✅
+- [x] CRUD Courses hoàn chỉnh ✅
+- [x] Upload ảnh hoạt động ✅
 
 ### Phase 2: Lessons & Materials
 - [ ] CRUD Lessons hoạt động
