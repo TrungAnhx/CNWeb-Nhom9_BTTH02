@@ -4,7 +4,7 @@ class Material {
     
     public function __construct() {
         $database = new Database();
-        $this->db = $database->connect();
+        $this->db = $database->getConnection();
     }
     
     /**

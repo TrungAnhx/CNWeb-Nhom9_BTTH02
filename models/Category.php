@@ -64,16 +64,9 @@ class Category {
         $sql = "DELETE FROM categories WHERE id = ?";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$id]);
-    private $conn;
-    private $table_name = "categories";
-
-    public function __construct() {
-        $database = new Database();
-        $this->conn = $database->getConnection();
     }
-
-    // 1. Lấy tất cả danh mục
-    public function getAll() {
+}
+?>
         $query = "SELECT * FROM " . $this->table_name . " ORDER BY id ASC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

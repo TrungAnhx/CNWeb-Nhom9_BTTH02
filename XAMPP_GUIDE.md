@@ -13,9 +13,29 @@ Ví dụ: `C:\xampp\htdocs\cnweb\`
 
 ## 📋 BƯỚC 2: Import Database
 
+### Cách 1: Qua phpMyAdmin
 1. Mở phpMyAdmin: `http://localhost/phpmyadmin`
-2. Import file `database.sql`
+2. Import các file SQL theo thứ tự:
+   - `database.sql` (Cấu trúc database + admin + categories)
+   - `dummy_users.sql` (Dữ liệu users)
+   - `lesson_import.sql` (Courses + Lessons + Materials + Enrollments)
 3. Database name: `onlinecourse`
+
+### Cách 2: Qua Command Line (Nhanh hơn)
+```powershell
+cd C:\xampp\mysql\bin
+
+# 1. Import cấu trúc database
+.\mysql.exe -u root onlinecourse < "d:\CNWeb-Nhom9_BTTH02\database.sql"
+
+# 2. Import users
+.\mysql.exe -u root onlinecourse < "d:\CNWeb-Nhom9_BTTH02\dummy_users.sql"
+
+# 3. Import courses, lessons, materials, enrollments
+.\mysql.exe -u root onlinecourse < "d:\CNWeb-Nhom9_BTTH02\lesson_import.sql"
+```
+
+**Lưu ý:** Phải import đúng thứ tự vì có foreign key dependencies!
 
 ---
 

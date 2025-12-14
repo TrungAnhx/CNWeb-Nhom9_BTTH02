@@ -3,11 +3,15 @@ class MaterialController {
     private $materialModel;
     private $lessonModel;
     private $courseModel;
+    private $db;
     
     public function __construct() {
+        $database = new Database();
+        $this->db = $database->getConnection();
+        
         $this->materialModel = new Material();
-        $this->lessonModel = new Lesson();
-        $this->courseModel = new Course();
+        $this->lessonModel = new Lesson($this->db);
+        $this->courseModel = new Course($this->db);
     }
     
     /**

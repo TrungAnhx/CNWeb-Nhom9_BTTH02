@@ -74,10 +74,28 @@ INSERT INTO lessons (course_id, title, content, video_url, order_num) VALUES
  '<h2>Xử lý bất đồng bộ</h2><h3>Promise:</h3><pre><code>fetch(url)\n    .then(response => response.json())\n    .then(data => console.log(data));</code></pre><h3>Async/Await:</h3><pre><code>async function getData() {\n    const response = await fetch(url);\n    const data = await response.json();\n    return data;\n}</code></pre>', 
  '', 2);
 
--- Thêm một vài enrollments mẫu
-INSERT INTO enrollments (course_id, student_id, status, progress) VALUES 
-(1, (SELECT id FROM users WHERE username='admin'), 'active', 30),
-(2, (SELECT id FROM users WHERE username='admin'), 'active', 50);
+-- Thêm enrollments mẫu (học viên đăng ký khóa học)
+-- LƯU Ý: Cần import file dummy_users.sql TRƯỚC để có dữ liệu users
+INSERT INTO enrollments (course_id, student_id, status, progress, enrolled_date) VALUES 
+-- Course 1: PHP từ A-Z (5 học viên)
+(1, (SELECT id FROM users WHERE username='student1'), 'active', 75, '2024-11-15 10:30:00'),
+(1, (SELECT id FROM users WHERE username='student2'), 'active', 60, '2024-11-20 14:20:00'),
+(1, (SELECT id FROM users WHERE username='student3'), 'active', 40, '2024-12-01 09:15:00'),
+(1, (SELECT id FROM users WHERE username='student4'), 'completed', 100, '2024-10-05 08:45:00'),
+(1, (SELECT id FROM users WHERE username='student5'), 'active', 20, '2024-12-10 16:30:00'),
+
+-- Course 2: MySQL và Database Design (3 học viên)
+(2, (SELECT id FROM users WHERE username='student1'), 'active', 85, '2024-11-10 11:00:00'),
+(2, (SELECT id FROM users WHERE username='student3'), 'active', 50, '2024-11-25 13:45:00'),
+(2, (SELECT id FROM users WHERE username='student5'), 'dropped', 15, '2024-10-20 10:00:00'),
+
+-- Course 3: JavaScript ES6+ (2 học viên)
+(3, (SELECT id FROM users WHERE username='student2'), 'active', 30, '2024-12-05 15:20:00'),
+(3, (SELECT id FROM users WHERE username='student4'), 'active', 45, '2024-12-08 09:30:00'),
+
+-- Admin cũng đăng ký để test
+(1, (SELECT id FROM users WHERE username='admin'), 'active', 30, '2024-12-01 10:00:00'),
+(2, (SELECT id FROM users WHERE username='admin'), 'active', 50, '2024-12-02 11:00:00');
 
 -- ================================================
 -- THÊM MATERIALS (TÀI LIỆU ĐÍNH KÈM)
