@@ -68,6 +68,9 @@ if (isset($_GET['controller'])) {
         exit;
     }
 }
+// Simple Router
+$controller = isset($_GET['controller']) ? trim($_GET['controller'], " .") : 'home';
+$action = isset($_GET['action']) ? trim($_GET['action'], " .") : 'index';
 
 // Load controller
 $controllerName = ucfirst($controller) . 'Controller';
